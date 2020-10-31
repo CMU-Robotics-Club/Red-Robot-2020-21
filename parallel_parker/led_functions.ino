@@ -7,7 +7,7 @@ CRGB leds[NUM_LEDS];
 #define RIGHT_LED 0
 
 #define UPDATE_RATE 50 // in Hz, decrease if performance is an issue
-#define BRIGHTNESS  255 // decrease if the leds are too bright
+#define BRIGHTNESS  50 // decrease if the leds are too bright
 
 
 void led_setup() { // This function must be somewhere in your setup or the LED's will not work
