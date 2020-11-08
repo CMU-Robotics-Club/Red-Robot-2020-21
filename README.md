@@ -1,2 +1,2 @@
-# Red Robot 2020-21
- Code for CMU Roboclub's Red Robot Hackathon
+# Blue Robot 2020-21
+ Code for CMU Roboclub's Blue Robot Hackathon
