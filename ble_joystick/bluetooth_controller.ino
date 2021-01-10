@@ -61,9 +61,8 @@ void process_input() {
 }
 
 void parse_data() {
-//  print_buffer();
-  if (buf[4] == 1) { // GET value from robot
-    if (buf[5] == 0) { // GET firmware version
+  if (buf[4] == 0x1) { // GET value from robot
+    if (buf[5] == 0x0) { // GET firmware version
       // We will send the string below to trick the app into thinking we're legit firmware
       write_head();
       Serial.write(buf[3]);
@@ -71,11 +70,18 @@ void parse_data() {
       Serial.write("06.01.107");
       write_end();
     }
-  } else if (buf[4] == 2) { // COMMAND from phone app
-    if (buf[5] == 5) { // Joystick command
+  } else if (buf[4] == 0x2) { // COMMAND from phone app
+    print_buffer();
+    if (buf[5] == 0x5) { // Joystick command
       // The left/right speeds are encoded in positions 6-7 and 8-9 in the buffer
       left_speed = -1 * (buf[6] + (buf[7] << 8));
       right_speed = buf[8] + (buf[9] << 8);
+    } else if(buf[5] == 0x22) { // Keyboard command
+      int tonePlayed = buf[6] + (buf[7] << 8);
+      int duration = buf[8];
+      playTone(tonePlayed, duration);
+    } else if(buf[5] == 0x8) {
+      close_claw();
     }
   }
 }
